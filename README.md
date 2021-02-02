@@ -1,6 +1,6 @@
 # projeto_perguntas
 
-A new Flutter project.
+This is a new project to learn how make an app with Flutter.
 
 ## Getting Started
 
