@@ -2,6 +2,14 @@
 
 This is a new project to learn how make an app with Flutter.
 
+# Course
+- [Aprenda Flutter e Desenvolva Apps Para Android e IOS 2021](https://www.udemy.com/share/102BJd/)
+Um Curso Completo Para Aprender Google Flutter e Dart Para a Construção de Apps Nativas Para iOS e Android.
+
+# Instructor
+
+- [Leonardo Moura Leitao](https://www.facebook.com/leonardo.leitao.35)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
