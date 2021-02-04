@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './questao.dart';
-import './resposta.dart';
+import './resultado.dart';
+import './questionario.dart';
 
 main() {
   runApp(PerguntaApp());
@@ -8,32 +8,54 @@ main() {
 
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
+  var _notaTotal = 0;
   final _perguntas = const [
     {
       'texto': "Qual sua cor favorita?",
-      'respostas': ['Verde', 'Azul', 'Vermelho', 'Preto']
+      'respostas': [
+        {'texto': 'Verde', 'nota': 9},
+        {'texto': 'Azul', 'nota': 2},
+        {'texto': 'Vermelho', 'nota': 1},
+        {'texto': 'Preto', 'nota': 3},
+      ]
     },
     {
       'texto': "Qual seu game favorito??",
-      'respostas': ['The Witcher 3', 'Call of Duty', 'Zelda', 'Fortnite']
+      'respostas': [
+        {'texto': 'The Witcher 3', 'nota': 10},
+        {'texto': 'Call of Duty', 'nota': 6},
+        {'texto': 'Zelda', 'nota': 10},
+        {'texto': 'Fortnite', 'nota': 1},
+      ]
     },
     {
       'texto': "Qual seu animal favorito??",
-      'respostas': ['Cachorro', 'Gato', 'Passaro', 'Rato']
+      'respostas': [
+        {'texto': 'Cachorro', 'nota': 7},
+        {'texto': 'Gato', 'nota': 5},
+        {'texto': 'Passaro', 'nota': 2},
+        {'texto': 'Rato', 'nota': 4},
+      ]
     },
     {
       'texto': "Qual sua comida favorita?",
-      'respostas': ['Lasanha', 'Pizza', 'Hamburguer', 'Sushi']
+      'respostas': [
+        {'texto': 'Lasanha', 'nota': 2},
+        {'texto': 'Pizza', 'nota': 9},
+        {'texto': 'Hamburguer', 'nota': 5},
+        {'texto': 'Sushi', 'nota': 6},
+      ]
     },
   ];
 
-  void _responder() {
+  void _responder(int notaUsuario) {
     setState(() {
       if (isPerguntaSelecionada) {
         _perguntaSelecionada++;
-      }      
+        _notaTotal += notaUsuario;
+      }
     });
-    print(_perguntaSelecionada);
+    print(_perguntaSelecionada + _notaTotal);
   }
 
   bool get isPerguntaSelecionada {
@@ -42,19 +64,18 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> respostas = isPerguntaSelecionada ? _perguntas[_perguntaSelecionada]['respostas'] : null;
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('Perguntas'),
         ),
-        body: isPerguntaSelecionada ? Column(
-          children: [
-            Questao(_perguntas[_perguntaSelecionada]['texto']),
-            ...respostas.map((t) => Resposta(t, _responder)).toList(),
-          ],
-        ) : null,
+        body: isPerguntaSelecionada
+            ? Questionario(
+                perguntas: _perguntas,
+                perguntaSelecionada: _perguntaSelecionada,
+                responder: _responder,
+              )
+            : Resultado(),
       ),
     );
   }
