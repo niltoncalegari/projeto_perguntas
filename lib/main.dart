@@ -55,7 +55,13 @@ class _PerguntaAppState extends State<PerguntaApp> {
         _notaTotal += notaUsuario;
       }
     });
-    print(_perguntaSelecionada + _notaTotal);
+  }
+
+  void _reiniciarQuestionario() {
+    setState(() {
+      _perguntaSelecionada = 0;
+      _notaTotal = 0;
+    });
   }
 
   bool get isPerguntaSelecionada {
@@ -75,7 +81,10 @@ class _PerguntaAppState extends State<PerguntaApp> {
                 perguntaSelecionada: _perguntaSelecionada,
                 responder: _responder,
               )
-            : Resultado(_notaTotal),
+            : Resultado(
+                _notaTotal,
+                _reiniciarQuestionario,
+              ),
       ),
     );
   }
